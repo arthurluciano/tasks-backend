@@ -1,16 +1,16 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
-import { HashService } from 'src/shared/hash.service'
 
+import { HashService } from '../../shared/hash.service'
 import { UsersRepository } from '../../users/users.repository'
 import { SignUpUserDto } from '../domain/dto/signup-user.dto'
+import { CreateAuthTokensUseCase } from './create-auth-tokens.use-case'
 
 @Injectable()
 export class SignUpUserUseCase {
   constructor(
     private usersRepository: UsersRepository,
     private hashService: HashService,
-    private jwtService: JwtService
+    private createAuthTokensUseCase: CreateAuthTokensUseCase
   ) {}
 
   async execute(data: SignUpUserDto) {
@@ -38,13 +38,10 @@ export class SignUpUserUseCase {
 
     delete user.password
 
-    const accessToken = await this.jwtService.signAsync({ sub: user.id })
+    const tokens = await this.createAuthTokensUseCase.execute(user.id)
 
     return {
-      tokens: {
-        accessToken,
-        refreshToken: 'not-implemented'
-      },
+      tokens,
       user
     }
   }
