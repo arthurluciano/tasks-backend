@@ -1,10 +1,9 @@
-import { Body, Controller, Delete, Post, Put, UseGuards } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Post, Put, Query, UseGuards } from '@nestjs/common'
 import { User } from '@prisma/client'
 import { UseUser } from 'src/users/infra/decorators/use-user.decorator'
 import { UserGuard } from 'src/users/infra/guards/user.guard'
 
 import { CreateTodoDto } from './domain/create-todo.dto'
-import { DeleteTodoDto } from './domain/delete-todo.dto'
 import { UpdateTodoDto } from './domain/update-todo.dto'
 import { TodosService } from './todos.service'
 
@@ -26,7 +25,13 @@ export class TodosController {
 
   @Delete('/')
   @UseGuards(UserGuard)
-  async delete(@Body() data: DeleteTodoDto, @UseUser() user: User) {
-    return await this.todosService.delete(data, user.id)
+  async delete(@Query('id') taskId: string, @UseUser() user: User) {
+    return await this.todosService.delete(taskId, user.id)
+  }
+
+  @Get('/')
+  @UseGuards(UserGuard)
+  async list(@UseUser() user: User) {
+    return await this.todosService.index(user.id)
   }
 }

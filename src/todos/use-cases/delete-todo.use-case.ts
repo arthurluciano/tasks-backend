@@ -1,16 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 
-import { DeleteTodoDto } from '../domain/delete-todo.dto'
 import { TodosRepository } from '../infra/todos.repository'
 
 @Injectable()
-export class DeleteTodoStatusUseCase {
+export class DeleteTodoUseCase {
   constructor(private todosRepository: TodosRepository) {}
 
-  async execute(data: DeleteTodoDto, userId: string) {
+  async execute(taskId: string, userId: string) {
     const todo = await this.todosRepository.findFirst({
       where: {
-        id: data.id
+        id: taskId
       }
     })
 

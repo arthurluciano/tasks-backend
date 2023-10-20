@@ -7,6 +7,10 @@ import { PrismaService } from '../../shared/infra/prisma.service'
 export class TodosRepository {
   constructor(private prisma: PrismaService) {}
 
+  async index(args: Prisma.TodoFindManyArgs) {
+    return await this.prisma.todo.findMany(args)
+  }
+
   async create(data: Prisma.TodoCreateInput) {
     return await this.prisma.todo.create({ data })
   }

@@ -1,16 +1,15 @@
 import { faker } from '@faker-js/faker'
-import { NotFoundException } from '@nestjs/common'
 import { Todo, User } from '@prisma/client'
 import { mock } from 'ts-mockito'
 
 import { TodosRepository } from '../infra/todos.repository'
-import { UpdateTodoStatusUseCase } from '../use-cases/update-todo-status.use-case'
+import { DeleteTodoUseCase } from '../use-cases/delete-todo.use-case'
 
 describe('/todos', () => {
   describe('update todo status use-case', () => {
     let todosRepository: TodosRepository
 
-    let updateTodoStatusUseCase: UpdateTodoStatusUseCase
+    let deleteTodoStatusUseCase: DeleteTodoUseCase
 
     let user: User
     let todo: Todo
@@ -18,7 +17,7 @@ describe('/todos', () => {
     beforeEach(() => {
       todosRepository = mock(TodosRepository)
 
-      updateTodoStatusUseCase = new UpdateTodoStatusUseCase(todosRepository)
+      deleteTodoStatusUseCase = new DeleteTodoUseCase(todosRepository)
 
       user = {
         id: faker.string.uuid(),
@@ -36,30 +35,13 @@ describe('/todos', () => {
       }
     })
 
-    it('should update status of todo', async () => {
-      const updatedTodo = { ...todo, checked: true }
-
+    it('should delete an todo', async () => {
       jest.spyOn(todosRepository, 'findFirst').mockResolvedValue(todo)
-      jest.spyOn(todosRepository, 'update').mockResolvedValue(updatedTodo)
+      jest.spyOn(todosRepository, 'delete').mockResolvedValue(todo)
 
-      const result = await updateTodoStatusUseCase.execute({ checked: true, id: todo.id }, user.id)
+      const result = await deleteTodoStatusUseCase.execute(todo.id, user.id)
 
-      expect(result).toBe(updatedTodo)
-    })
-
-    it('should not update an todo if id not exists', async () => {
-      jest.spyOn(todosRepository, 'findFirst').mockResolvedValue(null)
-      jest.spyOn(todosRepository, 'delete').mockResolvedValue(null)
-
-      await expect(
-        updateTodoStatusUseCase.execute(
-          {
-            checked: true,
-            id: todo.id
-          },
-          user.id
-        )
-      ).rejects.toBeInstanceOf(NotFoundException)
+      expect(result).toBe(todo)
     })
   })
 })
