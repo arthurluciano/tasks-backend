@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 
 import { HashService } from '../../shared/hash.service'
-import { UsersRepository } from '../../users/users.repository'
+import { UsersRepository } from '../../users/infra/users.repository'
 import { SignUpUserDto } from '../domain/dto/signup-user.dto'
 import { CreateAuthTokensUseCase } from './create-auth-tokens.use-case'
 

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
 
+import { UsersRepository } from './infra/users.repository'
 import { UsersUseCases } from './use-cases'
 import { UsersController } from './users.controller'
-import { UsersRepository } from './users.repository'
 import { UsersService } from './users.service'
 
 @Module({

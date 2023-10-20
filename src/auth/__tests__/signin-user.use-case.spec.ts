@@ -4,7 +4,7 @@ import { User } from '@prisma/client'
 import { mock } from 'ts-mockito'
 
 import { HashService } from '../../shared/hash.service'
-import { UsersRepository } from '../../users/users.repository'
+import { UsersRepository } from '../../users/infra/users.repository'
 import {
   CreateAuthTokensUseCase,
   CreateAuthTokensUseCaseResponse

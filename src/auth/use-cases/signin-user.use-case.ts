@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 
 import { HashService } from '../../shared/hash.service'
-import { UsersRepository } from '../../users/users.repository'
+import { UsersRepository } from '../../users/infra/users.repository'
 import { SignInUserDto } from '../domain/dto/signin-user.dto'
 import { CreateAuthTokensUseCase } from './create-auth-tokens.use-case'
 
