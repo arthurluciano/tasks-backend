@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common'
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 
 import { HashService } from '../../shared/hash.service'
 import { UsersRepository } from '../../users/users.repository'
@@ -21,7 +21,7 @@ export class SignInUserUseCase {
     })
 
     if (!user) {
-      throw new BadRequestException('Usuário não existe')
+      throw new NotFoundException('Usuário não existe')
     }
 
     const isSamePassword = await this.hashService.compare(data.password, user.password)

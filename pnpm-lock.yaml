@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@faker-js/faker':
+    specifier: ^8.2.0
+    version: 8.2.0
   '@nestjs/common':
     specifier: ^10.0.0
     version: 10.2.6(reflect-metadata@0.1.13)(rxjs@7.8.1)
@@ -23,6 +26,9 @@ dependencies:
   bcrypt:
     specifier: ^5.1.1
     version: 5.1.1
+  dotenv:
+    specifier: ^16.3.1
+    version: 16.3.1
   mo:
     specifier: ^1.7.3
     version: 1.7.3
@@ -130,6 +136,9 @@ devDependencies:
   ts-loader:
     specifier: ^9.4.3
     version: 9.4.4(typescript@5.2.2)(webpack@5.88.2)
+  ts-mockito:
+    specifier: ^2.6.1
+    version: 2.6.1
   ts-node:
     specifier: ^10.9.1
     version: 10.9.1(@types/node@20.7.0)(typescript@5.2.2)
@@ -803,6 +812,11 @@ packages:
     resolution: {integrity: sha512-NCC3zz2+nvYd+Ckfh87rA47zfu2QsQpvc6k1yzTk+b9KzRj0wkGa8LSoGOXN6Zv4lRf/EIoZ80biDh9HOI+RNQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@faker-js/faker@8.2.0:
+    resolution: {integrity: sha512-VacmzZqVxdWdf9y64lDOMZNDMM/FQdtM9IsaOPKOm2suYwEatb8VkdHqOzXcDnZbk7YDE2BmsJmy/2Hmkn563g==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.11:
     resolution: {integrity: sha512-N2brEuAadi0CcdeMXUkhbZB84eskAc8MEX1By6qEchoVywSgXPIjou4rYsl0V3Hj0ZnuGycGCjdNgockbzeWNA==}
@@ -2998,6 +3012,11 @@ packages:
     dependencies:
       is-obj: 2.0.0
     dev: true
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -6684,6 +6703,12 @@ packages:
       semver: 7.5.4
       typescript: 5.2.2
       webpack: 5.88.2
+    dev: true
+
+  /ts-mockito@2.6.1:
+    resolution: {integrity: sha512-qU9m/oEBQrKq5hwfbJ7MgmVN5Gu6lFnIGWvpxSjrqq6YYEVv+RwVFWySbZMBgazsWqv6ctAyVBpo9TmAxnOEKw==}
+    dependencies:
+      lodash: 4.17.21
     dev: true
 
   /ts-node@10.9.1(@types/node@20.4.7)(typescript@5.2.2):
