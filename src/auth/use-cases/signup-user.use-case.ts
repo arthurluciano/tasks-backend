@@ -21,11 +21,11 @@ export class SignUpUserUseCase {
     })
 
     if (userAlreadyExists) {
-      throw new BadRequestException('User already exists')
+      throw new BadRequestException('Esse usuário já existe')
     }
 
     if (data.password !== data.confirmPassword) {
-      throw new BadRequestException('Password not the same')
+      throw new BadRequestException('A senha não é a mesma')
     }
 
     const encryptedPassword = await this.hashService.hash(data.password)
